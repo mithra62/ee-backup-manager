@@ -1,8 +1,8 @@
 <?php
 
 $lang = [
-    'backup_manager_module_name'        => 'backup_manager',
-    'backup_manager_module_description' => 'backup_manager description',
-    'backup_manager_settings'           => 'backup_manager Settings',
+    'backup_manager_module_name'        => 'Backup Manager',
+    'backup_manager_module_description' => 'Adds management and download capabilities to ExpressionEngine backups',
+    'backup_manager_settings'           => 'Settings',
     ''                            => '',
 ];
