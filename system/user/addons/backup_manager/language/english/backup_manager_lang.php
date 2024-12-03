@@ -18,4 +18,5 @@ $lang = [
     'bm.removing' => 'removing...',
     'bm.form.header.remove_backup' => 'Verify your backup removal',
     'bm.backup_deleted' => 'Backup Deleted',
+    'bm.create.new_backup' => 'Create New Backup',
 ];
