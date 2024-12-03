@@ -2,8 +2,6 @@
 
 namespace Mithra62\BackupManager\ControlPanel\Routes;
 
-use ExpressionEngine\Service\Addon\Controllers\Mcp\AbstractRoute;
-
 class Download extends AbstractRoute
 {
     /**

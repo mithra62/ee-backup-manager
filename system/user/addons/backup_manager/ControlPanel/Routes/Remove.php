@@ -2,7 +2,8 @@
 
 namespace Mithra62\BackupManager\ControlPanel\Routes;
 
-use ExpressionEngine\Service\Addon\Controllers\Mcp\AbstractRoute;
+use Mithra62\BackupManager\Forms\Backups\Remove as BackupDeleteForm;
+use Mithra62\BackupManager\Forms\Backups\Remove AS RemoveForm;
 
 class Remove extends AbstractRoute
 {
@@ -22,15 +23,37 @@ class Remove extends AbstractRoute
      */
     public function process($id = false)
     {
-        $this->addBreadcrumb('remove', 'Remove');
+        $id = ee()->input->get('id');
+        $path = ee('backup_manager:BackupsService')->getBackup($id);
+        if (is_null($path)) {
+            ee()->functions->redirect(ee('CP/URL')->make($this->base_url));
+        }
 
-        $variables = [
-            'name' => 'My Name',
-            'color' => 'Green'
+        $form = new RemoveForm;
+
+        if (!empty($_POST) && ee()->input->post('confirm') == 'y') {
+            ee('backup_manager:BackupsService')->deleteBackup($path);
+            ee('CP/Alert')->makeInline('shared-form')
+                ->asSuccess()
+                ->withTitle(lang('bm.backup_deleted'))
+                ->defer();
+
+            ee()->functions->redirect($this->url('index'));
+        }
+
+        $vars = [
+            'cp_page_title' => lang('bm.header.remove_backup'),
+            'base_url' => $this->url('remove/', true, ['id' => $id]),
+            'save_btn_text' => lang('bm.remove'),
+            'save_btn_text_working' => lang('bm.removing'),
+            'alert' => $alert,
         ];
 
-        $this->setBody('Remove', $variables);
+        $vars += $form->generate();
 
+        $this->addBreadcrumb($this->url('edit'), 'bm.header.remove_backup');
+        $this->setBody('Remove', $vars);
+        $this->setHeading('bm.header.remove_backup');
         return $this;
     }
 }

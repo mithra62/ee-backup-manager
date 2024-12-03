@@ -2,7 +2,6 @@
 
 namespace Mithra62\BackupManager\ControlPanel\Routes;
 
-use ExpressionEngine\Service\Addon\Controllers\Mcp\AbstractRoute;
 use ExpressionEngine\Library\CP\Table;
 
 class Index extends AbstractRoute
@@ -21,11 +20,6 @@ class Index extends AbstractRoute
      * @var string
      */
     protected $cp_page_title = 'Index';
-
-    /**
-     * @var string
-     */
-    protected $base_url = 'addons/settings/backup_manager';
 
     /**
      * @param false $id

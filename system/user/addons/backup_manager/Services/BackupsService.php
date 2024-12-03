@@ -4,6 +4,15 @@ namespace Mithra62\BackupManager\Services;
 class BackupsService
 {
     /**
+     * @param string $path
+     * @return bool
+     */
+    public function deleteBackup(string $path): bool
+    {
+        return @unlink($path);
+    }
+
+    /**
      * @param string $hash
      * @return string|null
      */

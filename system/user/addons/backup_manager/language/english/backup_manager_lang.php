@@ -10,5 +10,12 @@ $lang = [
     'bm.file_name' => 'File Name',
     'bm.date' => 'Date',
     'bm.size' => 'Size',
-    'bm.manage' => 'Manage'
+    'bm.manage' => 'Manage',
+    'bm.header.remove_backup' => 'Remove Backup',
+    'bm.form.desc.confirm_delete' => 'Are you sure you want to remove this backup?',
+    'bm.form.confirm_remove_backup' => 'Confirm Removal',
+    'bm.remove' => 'Remove',
+    'bm.removing' => 'removing...',
+    'bm.form.header.remove_backup' => 'Verify your backup removal',
+    'bm.backup_deleted' => 'Backup Deleted',
 ];
