@@ -51,10 +51,10 @@ class Index extends AbstractRoute
             'limit' => $this->per_page,
         ]);
 
-        $vars['cp_page_title'] = lang('la.title');
+        $vars['cp_page_title'] = lang('bm.title');
         $table->setColumns([
-            'bm.name' => 'name',
-            'bm.date' => 'date',
+            'bm.file_name' => ['sort' => false],
+            'bm.date' => ['sort' => false],
             'bm.size' => ['sort' => false],
             'bm.manage' => [
                 'type' => Table::COL_TOOLBAR,
@@ -78,19 +78,18 @@ class Index extends AbstractRoute
         ];
 
         foreach ($backups as $backup) {
-            $url = $this->url( 'edit/' . $backup['hash']);
             $data[] = [
                 $backup['filename'],
-                $backup['date'],
-                $backup['size'],
+                ee('backup_manager:DateService')->format($backup['date']),
+                ee('backup_manager:FilesService')->format($backup['size']),
                 ['toolbar_items' => [
                     'download' => [
-                        'href' => $url,
-                        'title' => lang('la.edit_alert'),
+                        'href' => $this->url( 'download', true, ['id' => $backup['hash']]),
+                        'title' => lang('bm.download'),
                     ],
                     'remove' => [
-                        'href' => $this->url( 'delete/' . $backup['hash']),
-                        'title' => lang('la.remove_alert'),
+                        'href' => $this->url( 'remove', true, ['id' => $backup['hash']]),
+                        'title' => lang('bm.remove'),
                     ],
                 ]],
             ];

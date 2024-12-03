@@ -4,6 +4,24 @@ namespace Mithra62\BackupManager\Services;
 class BackupsService
 {
     /**
+     * @param string $hash
+     * @return string|null
+     */
+    public function getBackup(string $hash): ?string
+    {
+        $path = ee('Encrypt')->decode($hash);
+        $return = null;
+        if($path) {
+            $full = realpath(rtrim(PATH_CACHE, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $path);
+            if(file_exists($full)) {
+                $return = $full;
+            }
+        }
+
+        return $return;
+    }
+
+    /**
      * @return array
      */
     public function getBackups(): array
