@@ -17,6 +17,6 @@ class DateService
 
         $format = ee()->session->userdata('date_format', ee()->config->item('date_format'));
 
-        return ee()->localize->format_date($format, $date);
+        return ee()->localize->format_date($format . ' - %g:%i:%s %A', $date);
     }
 }
