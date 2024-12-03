@@ -53,16 +53,15 @@ class Index extends AbstractRoute
 
         $vars['cp_page_title'] = lang('la.title');
         $table->setColumns([
-            'bm.id' => 'id',
             'bm.name' => 'name',
-            'bm.type' => ['sort' => false],
-            'bm.status' => ['encode' => false, 'sort' => false],
+            'bm.date' => 'date',
+            'bm.size' => ['sort' => false],
             'bm.manage' => [
                 'type' => Table::COL_TOOLBAR,
             ],
         ]);
 
-        $table->setNoResultsText(sprintf(lang('no_found'), lang('la.alerts')));
+        $table->setNoResultsText(sprintf(lang('no_found'), lang('bm.backups')));
 
         $backups = ee('backup_manager:BackupsService')->getBackups();
 
@@ -70,10 +69,7 @@ class Index extends AbstractRoute
         $offset = ($page - 1) * $this->per_page; // Offset is 0 indexed
 
         // Handle Pagination
-        $totalBackups = $backups->count();
-
-        $backups->limit($this->per_page)
-            ->offset($offset);
+        $totalBackups = 0;// count($backups);
 
         $data = [];
         $sort_map = [
@@ -81,24 +77,19 @@ class Index extends AbstractRoute
             'la.name' => 'name',
         ];
 
-        $backups->order($sort_map[$sort_col], $sort_dir);
-        foreach ($backups->all() as $backup) {
-            $url = $this->url( 'edit/' . $alert->getId());
+        foreach ($backups as $backup) {
+            $url = $this->url( 'edit/' . $backup['hash']);
             $data[] = [
-                [
-                    'content' => $alert->getId(),
-                    'href' => $url,
-                ],
-                $alert->name,
-                $alert->log_into,
-                '',
+                $backup['filename'],
+                $backup['date'],
+                $backup['size'],
                 ['toolbar_items' => [
-                    'edit' => [
+                    'download' => [
                         'href' => $url,
                         'title' => lang('la.edit_alert'),
                     ],
                     'remove' => [
-                        'href' => $this->url( 'delete/' . $alert->getId()),
+                        'href' => $this->url( 'delete/' . $backup['hash']),
                         'title' => lang('la.remove_alert'),
                     ],
                 ]],
@@ -107,7 +98,7 @@ class Index extends AbstractRoute
 
         $table->setData($data);
 
-        $vars['pagination'] = ee('CP/Pagination', $totalAlerts)
+        $vars['pagination'] = ee('CP/Pagination', $totalBackups)
             ->perPage($this->per_page)
             ->currentPage($page)
             ->render($base_url);
