@@ -1,6 +1,8 @@
 <?php
 
 use Mithra62\BackupManager\Services\BackupsService;
+use Mithra62\BackupManager\Services\DateService;
+use Mithra62\BackupManager\Services\FilesService;
 
 return [
     'name'              => 'Backup Manager',
@@ -13,6 +15,12 @@ return [
     'services' => [
         'BackupsService' => function ($addon) {
             return new BackupsService();
+        },
+        'DateService' => function ($addon) {
+            return new DateService();
+        },
+        'FilesService' => function ($addon) {
+            return new FilesService();
         },
     ],
 ];
