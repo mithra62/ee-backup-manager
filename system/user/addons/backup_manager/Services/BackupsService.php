@@ -38,7 +38,7 @@ class BackupsService
         $return = [];
         $db_name = ee()->db->database;
         if(is_dir(PATH_CACHE)) {
-            $files = scandir(PATH_CACHE);
+            $files = scandir(PATH_CACHE, SCANDIR_SORT_DESCENDING,);
             foreach($files as $file) {
                 if(str_starts_with($file, $db_name)) {
                     $path = realpath(PATH_CACHE . '/' . $file);
