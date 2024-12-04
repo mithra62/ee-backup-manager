@@ -98,7 +98,7 @@ class Index extends AbstractRoute
         $vars['table'] = $table->viewData($base_url);
         $vars['base_url'] = $base_url;
 
-        $this->setBody('index', $vars);
+        $this->setBody('Index', $vars);
         return $this;
     }
 }

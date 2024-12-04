@@ -46,7 +46,6 @@ class Remove extends AbstractRoute
             'base_url' => $this->url('remove/', true, ['id' => $id]),
             'save_btn_text' => lang('bm.remove'),
             'save_btn_text_working' => lang('bm.removing'),
-            'alert' => $alert,
         ];
 
         $vars += $form->generate();
