@@ -40,7 +40,7 @@ class BackupsService
         if(is_dir(PATH_CACHE)) {
             $files = scandir(PATH_CACHE, SCANDIR_SORT_DESCENDING,);
             foreach($files as $file) {
-                if(str_starts_with($file, $db_name)) {
+                if(str_starts_with($file, $db_name) && str_ends_with($file, '.sql')) {
                     $path = realpath(PATH_CACHE . '/' . $file);
                     $details = stat($path);
                     $return[$file] = [
