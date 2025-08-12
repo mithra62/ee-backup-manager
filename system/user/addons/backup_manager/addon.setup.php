@@ -7,7 +7,7 @@ use Mithra62\BackupManager\Services\FilesService;
 return [
     'name'              => 'Backup Manager',
     'description'       => 'Adds management and download capabilities to ExpressionEngine backups',
-    'version'           => '1.0.1',
+    'version'           => '1.0.2',
     'author'            => 'mithra62',
     'author_url'        => 'https://github.com/mithra62/ee-backup-manager',
     'namespace'         => 'Mithra62\BackupManager',

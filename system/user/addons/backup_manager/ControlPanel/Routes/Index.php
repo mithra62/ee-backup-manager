@@ -66,10 +66,6 @@ class Index extends AbstractRoute
         $totalBackups = 0;// count($backups);
 
         $data = [];
-        $sort_map = [
-            'la.id' => 'id',
-            'la.name' => 'name',
-        ];
 
         foreach ($backups as $backup) {
             $data[] = [

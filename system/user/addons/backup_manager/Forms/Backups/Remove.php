@@ -13,7 +13,7 @@ class Remove extends AbstractForm
         $field_group = $form->getGroup('bm.form.header.remove_backup');
         $field_set = $field_group->getFieldSet('bm.form.confirm_remove_backup');
         $field_set->setDesc('bm.form.desc.confirm_delete');
-        $field = $field_set->getField('confirm', 'yes_no');
+        $field_set->getField('confirm', 'yes_no');
 
         return $form->toArray();
     }
